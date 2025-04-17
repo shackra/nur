@@ -15,4 +15,5 @@
 
 rec {
   ngpost = pkgs.libsForQt5.callPackage ./packages/ngpost { };
+  gtkcsslanguageserver = pkgs.callPackage ./packages/gtk-css-language-server { };
 }
