@@ -30,6 +30,19 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems f;
     in
     {
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        {
+          default = pkgs.mkShell {
+            buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
+            inherit (self.checks.${system}.pre-commit-check) shellHook;
+            packages = self.checks.${system}.pre-commit-check.enabledPackages;
+          };
+        }
+      );
       packages = forAllSystems (
         system:
         import ./default.nix {
