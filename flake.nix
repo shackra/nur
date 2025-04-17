@@ -11,7 +11,7 @@
 {
   description = "Jorge's personal NUR packages";
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*"; # current stable
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.*"; # current stable
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
   };
   outputs =
