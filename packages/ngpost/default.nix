@@ -1,3 +1,13 @@
+##########################################################################
+#                                                                        #
+#  This file is part of the shackra/nur project                          #
+#                                                                        #
+#  Copyright (C) 2025 Jorge Javier Araya Navarro                         #
+#                                                                        #
+#  SPDX-License-Identifier: GPL-3.0-or-later                             #
+#                                                                        #
+##########################################################################
+
 {
   stdenv,
   fetchFromGitHub,
