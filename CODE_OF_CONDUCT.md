@@ -80,7 +80,7 @@ We view The Rule as our promise to all users of this project of how the develope
 1. Love your juniors.
 1. Pray for your enemies in the love of Christ.
 1. Make peace with your adversary before the sun sets.
-1. Never despair of God's mercy. 
+1. Never despair of God's mercy.
 
 ## 3. Attribution
 
