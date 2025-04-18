@@ -57,5 +57,6 @@ stdenv.mkDerivation {
     license = licenses.gpl3;
     maintainers = with maintainers; [ shackra ];
     platforms = platforms.all;
+    mainProgram = "ngPost";
   };
 }
