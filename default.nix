@@ -13,7 +13,8 @@
   pkgs ? import <nixpkgs> { inherit system; },
 }:
 
-rec {
+{
   ngpost = pkgs.libsForQt5.callPackage ./packages/ngpost { };
   gtkcsslanguageserver = pkgs.callPackage ./packages/gtk-css-language-server { };
+  sui-mainnet = pkgs.callPackage ./packages/sui-mainnet { };
 }

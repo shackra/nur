@@ -1,0 +1,99 @@
+From febeafe7a10e7a0cfdcccb8490e5b73635143f31 Mon Sep 17 00:00:00 2001
+From: Jorge Javier Araya Navarro <jorge@esavara.cr>
+Date: Mon, 16 Jun 2025 20:37:46 -0600
+Subject: [PATCH 2/3] Replace tokio-macros from registry to MystenLabs' fork
+
+---
+ Cargo.lock                      | 13 +------------
+ external-crates/move/Cargo.lock |  7 +++----
+ nre/bpf/nodefw/Cargo.lock       |  9 ++++-----
+ 3 files changed, 8 insertions(+), 21 deletions(-)
+
+diff --git a/Cargo.lock b/Cargo.lock
+index f940a877fa..21607ba05c 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -17165,7 +17165,7 @@ dependencies = [
+  "pin-project-lite",
+  "signal-hook-registry",
+  "socket2 0.5.6",
+- "tokio-macros 2.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-macros 2.5.0 (git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb)",
+  "tracing",
+  "windows-sys 0.52.0",
+ ]
+@@ -17195,17 +17195,6 @@ dependencies = [
+  "tokio",
+ ]
+
+-[[package]]
+-name = "tokio-macros"
+-version = "2.5.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "6e06d43f1345a3bcd39f6a56dbb7dcab2ba47e68e8ac134855e7e2bdbaf8cab8"
+-dependencies = [
+- "proc-macro2",
+- "quote",
+- "syn 2.0.99",
+-]
+-
+ [[package]]
+ name = "tokio-macros"
+ version = "2.5.0"
+diff --git a/external-crates/move/Cargo.lock b/external-crates/move/Cargo.lock
+index 76cdfe32ff..3eb6b2df14 100644
+--- a/external-crates/move/Cargo.lock
++++ b/external-crates/move/Cargo.lock
+@@ -4326,19 +4326,18 @@ dependencies = [
+  "pin-project-lite",
+  "signal-hook-registry",
+  "socket2",
+- "tokio-macros",
++ "tokio-macros 2.5.0 (git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb)",
+  "windows-sys 0.52.0",
+ ]
+
+ [[package]]
+ name = "tokio-macros"
+ version = "2.5.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "6e06d43f1345a3bcd39f6a56dbb7dcab2ba47e68e8ac134855e7e2bdbaf8cab8"
++source = "git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb#7329bff6ee996d8df6cf810a9c2e59631ad5a2fb"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 2.0.98",
++ "syn 2.0.99",
+ ]
+
+ [[package]]
+diff --git a/nre/bpf/nodefw/Cargo.lock b/nre/bpf/nodefw/Cargo.lock
+index cff60f0a79..8f51599e9f 100644
+--- a/nre/bpf/nodefw/Cargo.lock
++++ b/nre/bpf/nodefw/Cargo.lock
+@@ -1341,19 +1341,18 @@ dependencies = [
+  "pin-project-lite",
+  "signal-hook-registry",
+  "socket2",
+- "tokio-macros",
++ "tokio-macros 2.5.0 (git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb)",
+  "windows-sys 0.48.0",
+ ]
+
+ [[package]]
+ name = "tokio-macros"
+-version = "2.2.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "5b8a1e28f2deaa14e508979454cb3a223b10b938b45af148bc0986de36f1923b"
++version = "2.5.0"
++source = "git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb#7329bff6ee996d8df6cf810a9c2e59631ad5a2fb"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn",
++ "syn 2.0.99",
+ ]
+
+ [[package]]
+--
+2.49.0
