@@ -16,20 +16,18 @@
 
 rustPlatform.buildRustPackage {
   pname = "sui";
-  version = "unstable-2025-06-16";
+  version = "unstable-1.50.1";
 
   src = fetchFromGitHub {
     owner = "MystenLabs";
     repo = "sui";
-    rev = "c7ec9546978b3c52b0c57bbdb9693f5068dd3383";
-    sha256 = "sha256-G/cGGPyNXaQG2LK+pGjG3m4seiTekQD7IdfT/9rLWw4=";
+    rev = "2c930c25f8d35a4aec31ba4c99ae577f4c37a27d";
+    sha256 = "sha256-jE6/BCw/TpD19KKwZ5AnWI7WX+oOGEaEZQ/m0gTnMoQ=";
   };
 
-  cargoHash = "sha256-u/bPz2KySApCOUDxQjmBDIqaXP6aypjM0NMZ8GKOemI=";
+  cargoHash = "sha256-ZKNqsNxZOU6EDo7v2uqcYTts3HZnujBFQrN7nR6JXzk=";
   cargoPatches = [
-    ../../patches/sui/0001-Remove-sui-replay-2.patch
-    ../../patches/sui/0002-Replace-tokio-macros-from-registry-to-MystenLabs-for.patch
-    ../../patches/sui/0003-Replace-tokio-util-with-MystenLabs-fork.patch
+    ../../patches/sui/0001-Replace-tokio-macros-and-tokio-utils-with-fork.patch
   ];
 
   cargoBuildFlags = [

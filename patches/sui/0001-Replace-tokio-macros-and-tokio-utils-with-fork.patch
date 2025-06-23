@@ -1,0 +1,371 @@
+From f1461129991255030cc51fce82a9cbbf822171a4 Mon Sep 17 00:00:00 2001
+From: Jorge Javier Araya Navarro <jorge@esavara.cr>
+Date: Mon, 23 Jun 2025 14:01:39 -0600
+Subject: [PATCH] Replace tokio-macros and tokio-utils with fork
+
+---
+ Cargo.lock | 97 ++++++++++++++++++++----------------------------------
+ 1 file changed, 35 insertions(+), 62 deletions(-)
+
+diff --git a/Cargo.lock b/Cargo.lock
+index ba22b0c11c..45517974d3 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -211,7 +211,7 @@ dependencies = [
+  "tap",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower 0.4.13",
+  "tracing",
+  "x509-parser",
+@@ -952,7 +952,7 @@ dependencies = [
+  "serde_json",
+  "tokio",
+  "tokio-stream",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower-service",
+ ]
+
+@@ -1459,7 +1459,7 @@ dependencies = [
+  "serde",
+  "time",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+ ]
+
+ [[package]]
+@@ -2942,7 +2942,7 @@ dependencies = [
+  "thiserror 1.0.69",
+  "tokio",
+  "tokio-stream",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tonic 0.13.1",
+  "tonic-build 0.13.1",
+  "tonic-rustls",
+@@ -2973,7 +2973,7 @@ dependencies = [
+  "tempfile",
+  "tokio",
+  "tokio-stream",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+  "typed-store",
+ ]
+@@ -5663,7 +5663,7 @@ dependencies = [
+  "indexmap 2.8.0",
+  "slab",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+ ]
+
+@@ -5682,7 +5682,7 @@ dependencies = [
+  "indexmap 2.8.0",
+  "slab",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+ ]
+
+@@ -6773,7 +6773,7 @@ dependencies = [
+  "thiserror 1.0.69",
+  "tokio",
+  "tokio-rustls 0.26.2",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+  "url",
+ ]
+@@ -6864,7 +6864,7 @@ dependencies = [
+  "thiserror 1.0.69",
+  "tokio",
+  "tokio-stream",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower 0.4.13",
+  "tracing",
+ ]
+@@ -8573,7 +8573,7 @@ dependencies = [
+  "serde",
+  "socket2 0.4.9",
+  "tap",
+- "tokio-util 0.7.13 (git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb)",
++ "tokio-util",
+  "toml 0.5.11",
+  "tracing",
+  "tracing-subscriber",
+@@ -10966,7 +10966,7 @@ dependencies = [
+  "pin-project-lite",
+  "signal-hook-registry",
+  "socket2 0.5.6",
+- "tokio-macros 2.5.0 (git+https://github.com/MystenLabs/tokio-msim-fork.git?rev=7329bff6ee996d8df6cf810a9c2e59631ad5a2fb)",
++ "tokio-macros",
+  "windows-sys 0.52.0",
+ ]
+
+@@ -11160,7 +11160,7 @@ dependencies = [
+  "sync_wrapper 1.0.1",
+  "tokio",
+  "tokio-rustls 0.26.2",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower-service",
+  "url",
+  "wasm-bindgen",
+@@ -11442,7 +11442,7 @@ dependencies = [
+  "subtle",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+ ]
+
+ [[package]]
+@@ -13442,7 +13442,7 @@ dependencies = [
+  "telemetry-subscribers",
+  "test-cluster",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+  "typed-store",
+ ]
+@@ -13586,7 +13586,7 @@ dependencies = [
+  "sui-indexer-alt-metrics",
+  "telemetry-subscribers",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+  "url",
+ ]
+@@ -13641,7 +13641,7 @@ dependencies = [
+  "tempfile",
+  "test-cluster",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+  "uuid 1.2.2",
+ ]
+@@ -14308,7 +14308,7 @@ dependencies = [
+  "test-cluster",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "toml 0.7.4",
+  "tower 0.5.2",
+  "tower-http",
+@@ -14352,7 +14352,7 @@ dependencies = [
+  "socket2 0.5.6",
+  "tokio",
+  "tokio-rustls 0.26.2",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower 0.5.2",
+  "tracing",
+ ]
+@@ -14426,7 +14426,7 @@ dependencies = [
+  "thiserror 1.0.69",
+  "tokio",
+  "tokio-stream",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "toml 0.7.4",
+  "tracing",
+  "url",
+@@ -14459,7 +14459,7 @@ dependencies = [
+  "telemetry-subscribers",
+  "tempfile",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "toml 0.7.4",
+  "tracing",
+  "url",
+@@ -14502,7 +14502,7 @@ dependencies = [
+  "tempfile",
+  "test-cluster",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+  "url",
+ ]
+@@ -14540,7 +14540,7 @@ dependencies = [
+  "thiserror 1.0.69",
+  "tokio",
+  "tokio-stream",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tonic 0.13.1",
+  "tracing",
+  "tracing-subscriber",
+@@ -14596,7 +14596,7 @@ dependencies = [
+  "telemetry-subscribers",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "toml 0.7.4",
+  "tower-http",
+  "tracing",
+@@ -14648,7 +14648,7 @@ dependencies = [
+  "telemetry-subscribers",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "toml 0.7.4",
+  "tower 0.4.13",
+  "tower-http",
+@@ -14667,7 +14667,7 @@ dependencies = [
+  "prometheus",
+  "sui-pg-db",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+ ]
+
+@@ -14693,7 +14693,7 @@ dependencies = [
+  "sui-types",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tonic 0.13.1",
+  "tracing",
+  "url",
+@@ -14834,7 +14834,7 @@ dependencies = [
+  "telemetry-subscribers",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower 0.5.2",
+  "tower-http",
+  "tracing",
+@@ -15625,7 +15625,7 @@ dependencies = [
+  "tempfile",
+  "thiserror 1.0.69",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+ ]
+
+@@ -16917,7 +16917,7 @@ dependencies = [
+  "sui-types",
+  "tempfile",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tracing",
+ ]
+
+@@ -17209,7 +17209,7 @@ dependencies = [
+  "pin-project-lite",
+  "signal-hook-registry",
+  "socket2 0.5.6",
+- "tokio-macros 2.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-macros",
+  "tracing",
+  "windows-sys 0.52.0",
+ ]
+@@ -17239,17 +17239,6 @@ dependencies = [
+  "tokio",
+ ]
+
+-[[package]]
+-name = "tokio-macros"
+-version = "2.5.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "6e06d43f1345a3bcd39f6a56dbb7dcab2ba47e68e8ac134855e7e2bdbaf8cab8"
+-dependencies = [
+- "proc-macro2",
+- "quote",
+- "syn 2.0.99",
+-]
+-
+ [[package]]
+ name = "tokio-macros"
+ version = "2.5.0"
+@@ -17282,7 +17271,7 @@ dependencies = [
+  "rand 0.8.5",
+  "socket2 0.5.6",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "whoami",
+ ]
+
+@@ -17329,7 +17318,7 @@ dependencies = [
+  "futures-core",
+  "pin-project-lite",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+ ]
+
+ [[package]]
+@@ -17371,22 +17360,6 @@ dependencies = [
+  "tungstenite 0.26.2",
+ ]
+
+-[[package]]
+-name = "tokio-util"
+-version = "0.7.13"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "d7fcaa8d55a2bdd6b83ace262b016eca0d79ee02818c5c1bcdf0305114081078"
+-dependencies = [
+- "bytes",
+- "futures-core",
+- "futures-io",
+- "futures-sink",
+- "futures-util",
+- "hashbrown 0.14.5",
+- "pin-project-lite",
+- "tokio",
+-]
+-
+ [[package]]
+ name = "tokio-util"
+ version = "0.7.13"
+@@ -17709,7 +17682,7 @@ dependencies = [
+  "rand 0.8.5",
+  "slab",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower-layer",
+  "tower-service",
+  "tracing",
+@@ -17729,7 +17702,7 @@ dependencies = [
+  "slab",
+  "sync_wrapper 1.0.1",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower-layer",
+  "tower-service",
+  "tracing",
+@@ -17758,7 +17731,7 @@ dependencies = [
+  "percent-encoding",
+  "pin-project-lite",
+  "tokio",
+- "tokio-util 0.7.13 (registry+https://github.com/rust-lang/crates.io-index)",
++ "tokio-util",
+  "tower 0.4.13",
+  "tower-layer",
+  "tower-service",
+--
+2.49.0
